@@ -1,0 +1,37 @@
+<h1>Contact Form</h1>
+<pre>
+  {{contactForm.value | json}}
+</pre>
+
+<form (ngSubmit)="onSubmit(contactForm.value)" #contactForm="ngForm">
+  <div class="mb-4">
+    <label for="name" class="form-label">Name</label>
+    <input type="text" class="form-control" id="name" name="name" [(ngModel)]="model.name" required #name="ngModel">
+    <div [hidden]="name.valid || name.touched==false" class="alert alert-danger">Este campo es requerido</div>
+  </div>
+  <div class="mb-4 form-check">
+    <label for="checkAdult" class="form-label">Tienes mas de 18 años</label>
+    <input type="checkbox" class="form-check-input" id="checkAdult" name="EsAdulto" [(ngModel)]="model.EsAdulto"
+      required #adult="ngModel">
+    <div [hidden]="adult.valid || adult.touched==false" class="alert alert-danger">Este campo es requerido</div>
+  </div>
+  <div class="mb-4">
+    <label for="name" class="form-label">Departament</label>
+    <select name="departamento" id="departamento" class="form-select form-select-sm" [(ngModel)]="model.departamento">
+      <option selected disabled>Selecciona una opcion</option>
+      <option value="marketing">Marketing</option>
+      <option value="ventas">ventas</option>
+      <option value="otro">otro</option>
+    </select>
+  </div>
+  <div class="mb-4">
+    <label for="comentario" class="form-label">comentario</label>
+    <textarea name="comentario" class="form-control" placeholder="Escriva un comentario...." id="comentario" rows="4"
+      [(ngModel)]="model.comentario" required #coment="ngModel"></textarea>
+    <div [hidden]="coment.valid || coment.touched==false" class="alert alert-danger">Este campo es requerido</div>
+  </div>
+  <div class="float-end d-grid gap-2 col-4">
+    <button class="btn btn-info btn-lg" [disabled]="contactForm.invalid">Enviar</button>
+  </div>
+
+</form>

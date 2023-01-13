@@ -1,0 +1,40 @@
+<h1>Contact Form</h1>
+<form (ngSubmit)="onSubmit()" [formGroup]="contactForm">
+  <div class="mb-4">
+    <label for="name" class="form-label">Name</label>
+    <input type="text" class="form-control" id="name" name="name" require formControlName="name">
+    <div *ngIf="contactForm.get('name')?.touched && contactForm.get('name')?.errors?.['required']"
+      class="alert alert-danger">Este campo es requerido</div>
+    <div *ngIf="contactForm.get('name')?.touched && contactForm.get('name')?.errors?.['minlength']"
+      class="alert alert-danger">Este campo tirne que tener mas de
+      {{contactForm.get('name')?.errors?.['minlength'].requiredLength}} caracteres</div>
+  </div>
+  <div class="mb-4 form-check">
+    <label for="checkAdult" class="form-label">Tienes mas de 18 años</label>
+    <input type="checkbox" class="form-check-input" id="checkAdult" name="EsAdulto" formControlName="adult" required>
+    <div *ngIf="contactForm.get('adult')?.touched && contactForm.get('adult')?.errors?.['required']"
+      class="alert alert-danger">Este campo es requerido</div>
+    <!-- <div [hidden]="adult.valid || adult.touched==false" class="alert alert-danger">Este campo es requerido</div> -->
+  </div>
+  <div class="mb-4">
+    <label for="name" class="form-label">Departament</label>
+    <select name="departamento" id="departamento" class="form-select form-select-sm" formControlName="depertament">
+      <option selected disabled>Selecciona una opcion</option>
+      <option value="marketing">Marketing</option>
+      <option value="ventas">ventas</option>
+      <option value="otro">otro</option>
+    </select>
+  </div>
+  <div class="mb-4">
+    <label for="comentario" class="form-label">comentario</label>
+    <textarea name="comentario" class="form-control" placeholder="Escriva un comentario...." id="comentario" rows="4"
+      required formControlName="coment"></textarea>
+    <div *ngIf="contactForm.get('coment')?.touched && contactForm.get('coment')?.errors?.['required']"
+      class="alert alert-danger">Este campo es requerido</div>
+    <!-- <div [hidden]="coment.valid || coment.touched==false" class="alert alert-danger">Este campo es requerido</div> -->
+  </div>
+  <div class="float-end d-grid gap-2 col-4">
+    <button class="btn btn-info btn-lg" [disabled]="contactForm.invalid">Enviar</button>
+  </div>
+
+</form>
